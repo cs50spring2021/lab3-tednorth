@@ -1,5 +1,5 @@
 # CS50 Lab 3
-## CS50 Spring 2019
+## CS50 Spring 2021
 
 ### lib
 
@@ -15,5 +15,5 @@ Useful for debugging.
 
 #### file
 
-The *file* module includes variants of the familiar `readlinep`) function, which makes it easy to read a line of input, of unbounded size.
+The *file* module includes variants of the familiar `readlinep()` function, which makes it easy to read a line of input, of unbounded size.
 

@@ -1,5 +1,5 @@
 # CS50 Lab 3
-## CS50 Spring 2019
+## CS50 Spring 2021
 
 ### bag
 
@@ -58,7 +58,7 @@ Other implementations are permitted, but this LIFO list approach is fast and eas
 * `bag.h` - the interface
 * `bag.c` - the implementation
 * `bagtest.c` - unit test driver
-* `names` - test data
+* `test.names` - test data
 * `testing.out` - result of `make test &> testing.out`
 
 ### Compilation
