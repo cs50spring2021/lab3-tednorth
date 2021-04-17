@@ -152,7 +152,7 @@ bag_delete(bag_t* bag, void (*itemdelete)(void* item) )
         (*itemdelete)(node->item);      // delete node's item
       }
       bagnode_t* next = node->next;     // remember what comes next
-      mem_free(node);                 // free the node
+      mem_free(node);                   // free the node
       node = next;                      // and move on to next
     }
 
