@@ -13,13 +13,13 @@ _Items_ are indistinguishable, so the _extract_ function is free to return any _
 The *bag* module, defined in `bag.h` and implemented in `bag.c`, implements a bag of `void*`, and exports the following functions:
 
 ```c
-bag_t *bag_new(void);
-void bag_insert(bag_t *bag, void *item);
-void *bag_extract(bag_t *bag);
-void bag_print(bag_t *bag, FILE *fp, 
-	       void (*itemprint)(FILE *fp, void *item));
-void bag_iterate(bag_t *bag, void *arg, void (*itemfunc)(void *arg, void *item) );
-void bag_delete(bag_t *bag, void (*itemdelete)(void *item) );
+bag_t* bag_new(void);
+void bag_insert(bag_t* bag, void* item);
+void* bag_extract(bag_t* bag);
+void bag_print(bag_t* bag, FILE* fp, 
+	       void (*itemprint)(FILE* fp, void* item));
+void bag_iterate(bag_t* bag, void* arg, void (*itemfunc)(void* arg, void* item) );
+void bag_delete(bag_t* bag, void (*itemdelete)(void* item) );
 ```
 
 ### Implementation
@@ -28,7 +28,7 @@ We implement this bag as a linked list.
 The *bag* itself is represented as a `struct bag` containing a pointer to the head of the list; the head pointer is NULL when the bag is empty.
 
 Each node in the list is a `struct bagnode`, a type defined internally to the module.
-Each bagnode includes a pointer to the `void *item` and a pointer to the next bagnode on the list.
+Each bagnode includes a pointer to the `void* item` and a pointer to the next bagnode on the list.
 
 To insert a new item in the bag we create a new bagnode to hold the `item`, and insert it at the head of the list.
 

@@ -12,14 +12,14 @@
 #include "bag.h"
 #include "file.h"
 
-static void nameprint(FILE *fp, void *item);
-static void namedelete(void *item);
-static void itemcount(void *arg, void *item);
+static void nameprint(FILE* fp, void* item);
+static void namedelete(void* item);
+static void itemcount(void* arg, void* item);
 
 /* **************************************** */
 int main() 
 {
-  bag_t *bag;
+  bag_t* bag;
   int namecount = 0;
 
   // create a bag
@@ -37,7 +37,7 @@ int main()
   // read lines from stdin
   namecount = 0;
   while (!feof(stdin)) {
-    char *name = file_readLine(stdin);
+    char* name = file_readLine(stdin);
     if (name != NULL) {
       bag_insert(bag, name);
       namecount++;
@@ -70,18 +70,18 @@ int main()
 /* count the non-null items in the bag.
  * note here we don't care what kind of item is in bag.
  */
-static void itemcount(void *arg, void *item)
+static void itemcount(void* arg, void* item)
 {
-  int *nitems = arg;
+  int* nitems = arg;
 
   if (nitems != NULL && item != NULL)
     (*nitems)++;
 }
 
 // print a name, in quotes.
-void nameprint(FILE *fp, void *item)
+void nameprint(FILE* fp, void* item)
 {
-  char *name = item; 
+  char* name = item; 
   if (name == NULL) {
     fprintf(fp, "(null)");
   }
@@ -91,7 +91,7 @@ void nameprint(FILE *fp, void *item)
 }
 
 // delete a name 
-void namedelete(void *item)
+void namedelete(void* item)
 {
   if (item != NULL) {
     free(item);   
