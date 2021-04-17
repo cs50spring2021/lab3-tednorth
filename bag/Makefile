@@ -12,6 +12,8 @@ LIBS =
 CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I../lib
 CC = gcc
 MAKE = make
+# for memory-leak tests
+VALGRIND = valgrind --leak-check=full --show-leak-kinds=all
 
 bagtest: $(OBJS)
 	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
@@ -28,7 +30,7 @@ test: bagtest test.names
 
 # expects a file `test.names` to exist; it can contain any text.
 valgrind: bagtest test.names
-	valgrind ./bagtest < test.names
+	$(VALGRIND) ./bagtest < test.names
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info
