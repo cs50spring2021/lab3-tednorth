@@ -28,7 +28,7 @@ void*
 mem_assert(void* p, const char* message)
 {
   if (p == NULL) {
-    fprintf(stderr, "MALLOC FAILED: %s\n", message);
+    fprintf(stderr, "NULL POINTER: %s\n", message);
     exit (99);
   }
   return p;
