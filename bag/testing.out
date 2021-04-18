@@ -1,10 +1,30 @@
+gcc -Wall -pedantic -std=c11 -ggdb  -I../lib   -c -o bagtest.o bagtest.c
+gcc -Wall -pedantic -std=c11 -ggdb  -I../lib   -c -o bag.o bag.c
+gcc -Wall -pedantic -std=c11 -ggdb  -I../lib bagtest.o bag.o ../lib/file.o ../lib/mem.o  -o bagtest
 ./bagtest < test.names
-Count (should be zero): 0
-testing bag_insert...
-Count (should be 96): 96
-test with null bag, good item...
+Create first bag...
+
+Test with null bag, good item...
 test with null item...
 test with null bag, null item...
+
+Count (should be zero): 0
+
+Testing bag_insert...
+
+Count (should be 7): 7
+
 The bag:
-{"tate","Zakiyatu","Xiao","Tanvir","Stephen","Siddharth","Samuel","Samuel","Ryan","Robin","Robert","Richard","Rheanna","Patrick","Maxwell","Mark","Mackenzie","Lucas","Leonardo","Kysen","Joseph","Jordan","Jonathan","James","Jad","Henry","Harsh","Guilherme","Emiliano","Ellie","Ella","Edmund","Damian","Colton","Cody","Cleo","Christopher","Chandan","Burke","Benjamin","Benedict","Benedict","Avery","Arijeet","Angela","Andrew","Andrew","Allison","Alina","Albert","Abigail","Zimehr","Zhoucai","Zechen","Yuchuan","Yi","William","Victoria","Tanner","Tai","So","Ryan","Pierce","Nicholas","Nicholas","Neha","Luke","Lily","Liam","Kyoung","Kewen","Kaihao","Jose","John","Jason","Itish","Isaac","Hermilla","Hana","Grace","Giorgiana","Everett","Eve","Eric","Emilie","Elizabeth","Devon","Claire","Chenran","Chavin","Chahak","Camden","Amittai","Alphonso","Allan","Alan",}
-delete the bag...
+{"John","Paul","Ringo","George","Mary","Paul","Peter",}
+
+Move items to a new bag...
+
+The old bag:
+Count (should be zero): 0
+{}
+
+The new bag:
+Count (should be 7): 7
+{"Peter","Paul","Mary","George","Ringo","Paul","John",}
+
+delete the bags...
