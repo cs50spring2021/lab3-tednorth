@@ -1,7 +1,11 @@
 /* 
  * bagtest.c - test program for CS50 bag module
  *
- * usage: read lines from stdin
+ * usage: read names from stdin, each on one line
+ *
+ * This program is a "unit test" for the bag module.
+ * It does a decent job of testing the module, but is
+ * not a complete test; it should test more corner cases.
  *
  * CS50, April 2019, 2021
  */
@@ -19,49 +23,81 @@ static void itemcount(void* arg, void* item);
 /* **************************************** */
 int main() 
 {
-  bag_t* bag;
-  int namecount = 0;
+  bag_t* bag1 = NULL;           // one bag
+  bag_t* bag2 = NULL;           // another bag
+  char* name = NULL;            // a name in the bag
+  int namecount = 0;            // number of names put in the bag
+  int bagcount = 0;             // number of names found in a bag
 
-  // create a bag
-  bag = bag_new();
-  if (bag == NULL) {
-    fprintf(stderr, "bag_new failed\n");
+  printf("Create first bag...\n");
+  bag1 = bag_new();
+  if (bag1 == NULL) {
+    fprintf(stderr, "bag_new failed for bag1\n");
     return 1;
   }
 
-  printf("Count (should be zero): ");
-  bag_iterate(bag, &namecount, itemcount);
+  printf("\nTest with null bag, good item...\n");
+  bag_insert(NULL, "Dartmouth");
+  printf("test with null item...\n");
+  bag_insert(bag1, NULL); 
+  printf("test with null bag, null item...\n");
+  bag_insert(NULL, NULL);
+
+  printf("\nCount (should be zero): ");
+  bagcount = 0;
+  bag_iterate(bag1, &bagcount, itemcount);
   printf("%d\n", namecount);  
 
-  printf("testing bag_insert...\n");
+  printf("\nTesting bag_insert...\n");
   // read lines from stdin
   namecount = 0;
   while (!feof(stdin)) {
-    char* name = file_readLine(stdin);
+    name = file_readLine(stdin);
     if (name != NULL) {
-      bag_insert(bag, name);
+      bag_insert(bag1, name);
       namecount++;
     }
   }
 
-  printf("Count (should be %d): ", namecount);
-  namecount = 0;
-  bag_iterate(bag, &namecount, itemcount);
+  printf("\nCount (should be %d): ", namecount);
+  bagcount = 0;
+  bag_iterate(bag1, &bagcount, itemcount);
   printf("%d\n", namecount);  
 
-  printf("test with null bag, good item...\n");
-  bag_insert(NULL, "Dartmouth");
-  printf("test with null item...\n");
-  bag_insert(bag, NULL); 
-  printf("test with null bag, null item...\n");
-  bag_insert(NULL, NULL);
-
-  printf("The bag:\n");
-  bag_print(bag, stdout, nameprint);
+  printf("\nThe bag:\n");
+  bag_print(bag1, stdout, nameprint);
   printf("\n");
 
-  printf("delete the bag...\n");
-  bag_delete(bag, namedelete);
+  printf("\nMove items to a new bag...\n");
+  bag2 = bag_new();
+  if (bag2 == NULL) {
+    fprintf(stderr, "bag_new failed for bag2\n");
+    return 2;
+  }
+
+  while ( (name = bag_extract(bag1)) != NULL) {
+    bag_insert(bag2, name);
+  }
+
+  printf("\nThe old bag:\n");
+  printf("Count (should be zero): ");
+  bagcount = 0;
+  bag_iterate(bag1, &bagcount, itemcount);
+  printf("%d\n", bagcount);  
+  bag_print(bag1, stdout, nameprint);
+  printf("\n");
+
+  printf("\nThe new bag:\n");
+  printf("Count (should be %d): ", namecount);
+  bagcount = 0;
+  bag_iterate(bag2, &bagcount, itemcount);
+  printf("%d\n", bagcount);  
+  bag_print(bag2, stdout, nameprint);
+  printf("\n");
+
+  printf("\ndelete the bags...\n");
+  bag_delete(bag1, namedelete);
+  bag_delete(bag2, namedelete);
 
   return 0;
 }
