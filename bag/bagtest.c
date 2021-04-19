@@ -46,7 +46,7 @@ int main()
   printf("\nCount (should be zero): ");
   bagcount = 0;
   bag_iterate(bag1, &bagcount, itemcount);
-  printf("%d\n", namecount);  
+  printf("%d\n", bagcount);
 
   printf("\nTesting bag_insert...\n");
   // read lines from stdin
@@ -62,7 +62,7 @@ int main()
   printf("\nCount (should be %d): ", namecount);
   bagcount = 0;
   bag_iterate(bag1, &bagcount, itemcount);
-  printf("%d\n", namecount);  
+  printf("%d\n", bagcount);
 
   printf("\nThe bag:\n");
   bag_print(bag1, stdout, nameprint);
