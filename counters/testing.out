@@ -1,0 +1,46 @@
+gcc -Wall -pedantic -std=c11 -ggdb  -I../lib   -c -o counters_test.o counters_test.c
+counters_test.c: In function 'main':
+counters_test.c:43:41: warning: passing argument 3 of 'counters_iterate' from incompatible pointer type [-Wincompatible-pointer-types]
+     counters_iterate(counter1,&keycount,countFunc);
+                                         ^~~~~~~~~
+In file included from counters_test.c:14:0:
+counters.h:112:6: note: expected 'void (*)(void *, const int,  const int)' but argument is of type 'void (*)(void *, const char *, void *)'
+ void counters_iterate(counters_t* ctrs, void* arg,
+      ^~~~~~~~~~~~~~~~
+counters_test.c:54:43: warning: passing argument 3 of 'counters_iterate' from incompatible pointer type [-Wincompatible-pointer-types]
+     counters_iterate(counter1, &keycount, countFunc);
+                                           ^~~~~~~~~
+In file included from counters_test.c:14:0:
+counters.h:112:6: note: expected 'void (*)(void *, const int,  const int)' but argument is of type 'void (*)(void *, const char *, void *)'
+ void counters_iterate(counters_t* ctrs, void* arg,
+      ^~~~~~~~~~~~~~~~
+gcc -Wall -pedantic -std=c11 -ggdb  -I../lib counters_test.o counters.o ../lib/file.o ../lib/mem.o  -o counters_test
+./counters_test < test.names
+Create first counter set...
+
+Test with null counter set, good key...
+Test with negative key...
+Test with null counter set, negative key...
+
+Key count (should be zero): 0
+
+The counter set:
+{}
+Testing counters_add...
+
+Key count (should be 1): 1
+
+The counter set:
+{(3,0)}
+The counter set:
+{(5,0)(3,0)}
+The counter set:
+{(5,1)(3,0)}
+Retrieve from counter1...
+The count associated with key 3 is 0
+The count associated with key 5 is 1
+
+Testing counters_set(), by altering key 3...
+
+The counter set:
+{(5,1)(3,8)}

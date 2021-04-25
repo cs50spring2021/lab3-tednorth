@@ -16,6 +16,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include "mem.h"
 
 /**************** global types ****************/
 typedef struct set set_t;  // opaque to users of the module

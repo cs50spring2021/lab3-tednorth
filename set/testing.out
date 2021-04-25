@@ -1,0 +1,30 @@
+./set_test < test.names
+Create first set...
+
+Test with null set, good item...
+test with null item...
+test with null bag, null item...
+
+Count (should be zero): 0
+
+Testing set_insert...
+namecount = 0
+Equal keys!
+Equal keys!
+Equal keys!
+Equal keys!
+Equal keys!
+Equal keys!
+
+Count (should be 7): 1
+
+The set:
+{(key4,Peter),}
+
+Move items to a new set...
+
+The old set:
+Count (should be zero): 1
+{(key4,Peter),}
+
+delete the sets...
